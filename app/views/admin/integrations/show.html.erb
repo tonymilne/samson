@@ -1,16 +1,35 @@
 <% content_for :page_title, @identifier %>
 
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @identifier %></td>
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
+<form>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Enabled</th>
+        <th>Global Config</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @integration.name %></td>
+        <td><%= @integration.description %></td>
+        <td><%= @integration.enabled ? "YES" : "NO" %></td>
+        <td>
+          <% @integration.global_config.each do |config| %>
+            <% config.each do |field, label| %>
+              <label>
+                <%= label %>
+                <input name="<%= field %>" type="text" />
+              </label>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <input type="submit" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

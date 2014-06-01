@@ -5,5 +5,6 @@ description: |
   In laoreet nisl sed nisl facilisis scelerisque.
 global_config:
   - GLOBAL_TOKEN: Global token
+  - SECOND_GLOBAL_VARIABLE: A second global variable
 stage_config:
   - STAGE_TOKEN: Stage token

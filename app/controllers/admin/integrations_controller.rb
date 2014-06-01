@@ -1,13 +1,21 @@
+require 'yaml'
+
 class Admin::IntegrationsController < ApplicationController
   before_filter :authorize_super_admin!
 
   def index
-    @integrations = Array.new
-    @integrations.push Integration.new identifier: :example, name: :example
+    @integrations = Integration.integrations
   end
 
   def show
-    @identifier = params[:identifier]
+    identifier = params[:identifier]
+    @integration = Integration.integrations.detect {|integration| integration.identifier == identifier }
+    # Create the integration if it is nil.
+    # @integration ||= Integration.new identifier, {}
+  end
+
+  def create
+    Rails.logger.info "attempting to create a new integration record"
   end
 
   # Updates

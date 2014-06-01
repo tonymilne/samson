@@ -67,10 +67,10 @@ Samson::Application.routes.draw do
     resource :projects, only: [:show]
     resources :commands, except: [:show]
     resource :lock, only: [:create, :destroy]
-    resources :integrations, only: [:index] do
+    resources :integrations, only: [:index, :create] do
       collection do
         get ':identifier', action: 'show'
-        post ':identifier', action: 'update', as: :update
+        post ':identifier', action: 'update'
       end
     end
   end
