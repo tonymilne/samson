@@ -23,6 +23,7 @@
 /config/redis.development.conf
 
 /node_modules
+/vendor/bundle
 
 /public/assets
 /cached_repos/
