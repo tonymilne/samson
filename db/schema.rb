@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520043144) do
+ActiveRecord::Schema.define(version: 20140601043700) do
 
   create_table "commands", force: true do |t|
     t.text     "command",    limit: 16777215
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.datetime "updated_at"
   end
 
-  add_index "deploys", ["created_at"], name: "index_deploys_on_created_at", using: :btree
-  add_index "deploys", ["job_id"], name: "index_deploys_on_job_id", using: :btree
+  add_index "deploys", ["created_at"], name: "index_deploys_on_created_at"
+  add_index "deploys", ["job_id"], name: "index_deploys_on_job_id"
 
   create_table "flowdock_flows", force: true do |t|
     t.string   "name",       null: false
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.integer  "stage_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "integrations", force: true do |t|
+    t.string  "identifier"
+    t.text    "config"
+    t.boolean "enabled"
   end
 
   create_table "jobs", force: true do |t|
@@ -50,7 +56,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.string   "commit"
   end
 
-  add_index "jobs", ["project_id"], name: "index_jobs_on_project_id", using: :btree
+  add_index "jobs", ["project_id"], name: "index_jobs_on_project_id"
 
   create_table "locks", force: true do |t|
     t.integer  "stage_id"
@@ -66,7 +72,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.integer "stage_id"
   end
 
-  add_index "new_relic_applications", ["stage_id", "name"], name: "index_new_relic_applications_on_stage_id_and_name", unique: true, using: :btree
+  add_index "new_relic_applications", ["stage_id", "name"], name: "index_new_relic_applications_on_stage_id_and_name", unique: true
 
   create_table "projects", force: true do |t|
     t.string   "name",           null: false
@@ -78,7 +84,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.string   "release_branch"
   end
 
-  add_index "projects", ["token"], name: "index_projects_on_token", using: :btree
+  add_index "projects", ["token"], name: "index_projects_on_token"
 
   create_table "releases", force: true do |t|
     t.integer  "project_id",              null: false
@@ -90,7 +96,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.datetime "updated_at"
   end
 
-  add_index "releases", ["project_id", "number"], name: "index_releases_on_project_id_and_number", unique: true, using: :btree
+  add_index "releases", ["project_id", "number"], name: "index_releases_on_project_id_and_number", unique: true
 
   create_table "stage_commands", force: true do |t|
     t.integer  "stage_id"
@@ -98,6 +104,12 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.integer  "position",   default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "stage_integrations", force: true do |t|
+    t.integer "stage_id"
+    t.integer "integration_id"
+    t.text    "config"
   end
 
   create_table "stages", force: true do |t|
@@ -121,7 +133,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.datetime "updated_at"
   end
 
-  add_index "stars", ["user_id", "project_id"], name: "index_stars_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "stars", ["user_id", "project_id"], name: "index_stars_on_user_id_and_project_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -134,7 +146,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.string   "external_id"
   end
 
-  add_index "users", ["external_id"], name: "index_users_on_external_id", unique: true, using: :btree
+  add_index "users", ["external_id"], name: "index_users_on_external_id", unique: true
 
   create_table "webhooks", force: true do |t|
     t.integer  "project_id", null: false
@@ -144,7 +156,7 @@ ActiveRecord::Schema.define(version: 20140520043144) do
     t.datetime "updated_at"
   end
 
-  add_index "webhooks", ["project_id", "branch"], name: "index_webhooks_on_project_id_and_branch", using: :btree
-  add_index "webhooks", ["stage_id", "branch"], name: "index_webhooks_on_stage_id_and_branch", unique: true, using: :btree
+  add_index "webhooks", ["project_id", "branch"], name: "index_webhooks_on_project_id_and_branch"
+  add_index "webhooks", ["stage_id", "branch"], name: "index_webhooks_on_stage_id_and_branch", unique: true
 
 end

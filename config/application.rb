@@ -53,5 +53,8 @@ module Samson
       host: config.samson.uri.host,
       protocol: config.samson.uri.scheme
     }
+
+    # Dynamically load the integrations from /lib/integrations.
+    config.autoload_paths += %W(#{config.root}/lib/integrations)
   end
 end

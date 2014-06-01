@@ -42,6 +42,9 @@
             <li><%= link_to "Projects", admin_projects_path %></li>
             <li><%= link_to "Commands", admin_commands_path %></li>
             <li><%= link_to "Users", admin_users_path %></li>
+            <% if current_user.try(:is_super_admin?) %>
+              <li><%= link_to "Integrations", admin_integrations_path %></li>
+            <% end %>
           </ul>
         </li>
       <% end %>

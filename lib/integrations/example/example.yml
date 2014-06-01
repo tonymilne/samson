@@ -1,0 +1,9 @@
+name: Example
+description: |
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo augue vitae ipsum posuere mollis.
+  Ut vehicula laoreet neque, sed congue ipsum varius ut. Curabitur a elit vel massa blandit sollicitudin.
+  In laoreet nisl sed nisl facilisis scelerisque.
+global_config:
+  - GLOBAL_TOKEN: Global token
+stage_config:
+  - STAGE_TOKEN: Stage token

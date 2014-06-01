@@ -1,0 +1,12 @@
+<h2>Before Deploy:</h2>
+<ul id="integrations" data-url="" data-sortable="true">
+<% @integrations.each.with_index do |integration, index| %>
+  <li class="stage-bar bar list-unstyled clearfix sortable" data-id="integration_id_<%- integration.identifier %>">
+    <div class="btn-group pull-right">
+      <%= link_to integration.name, "/admin/integrations/#{integration.identifier}" %>
+      ON / OFF
+    </div>
+  </li>
+<% end %>
+</ul>
+<h2>After Deploy:</h2>
