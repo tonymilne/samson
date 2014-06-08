@@ -70,7 +70,7 @@ Samson::Application.routes.draw do
     resources :integrations, only: [:index, :create] do
       collection do
         get ':identifier', action: 'show'
-        post ':identifier', action: 'update'
+        post ':identifier', { action: 'update', as: :update }
       end
     end
   end

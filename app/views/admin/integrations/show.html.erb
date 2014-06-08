@@ -1,6 +1,6 @@
 <% content_for :page_title, @identifier %>
 
-<form>
+<%= form_for @integration, url: update_admin_integrations_path(@installed_integration["identifier"]), :method => :POST do |form| %>
   <table class="table table-condensed">
     <thead>
       <tr>
@@ -13,23 +13,31 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @integration.name %></td>
-        <td><%= @integration.description %></td>
-        <td><%= @integration.enabled ? "YES" : "NO" %></td>
+        <td><%= @installed_integration["name"] %></td>
+        <td><%= @installed_integration["description"] %></td>
         <td>
-          <% @integration.global_config.each do |config| %>
-            <% config.each do |field, label| %>
-              <label>
-                <%= label %>
-                <input name="<%= field %>" type="text" />
-              </label>
+          <%= form.radio_button :enabled, "1", :checked => @integration.enabled %>
+          <%= label :enabled_1, 'Enabled' %>
+
+          <%= form.radio_button :enabled, "0", :checked => !@integration.enabled %>
+          <%= label :enabled_0, 'Disabled' %>
+        <td>
+          <%= fields_for :config do |ff| %>
+            <% @installed_integration["global_config"].each do |config| %>
+              <% config.each do |field, label| %>
+                <label>
+                  <%= label %>
+                  <%= ff.text_field field, :value => value_from_config(@integration.config, field) %>
+                </label>
+              <% end %>
             <% end %>
           <% end %>
         </td>
         <td>
+          <%= form.hidden_field :identifier, value: @installed_integration[:identifier] %>
           <input type="submit" />
         </td>
       </tr>
     </tbody>
   </table>
-</form>
+<% end %>
